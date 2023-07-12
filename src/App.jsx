@@ -34,6 +34,14 @@ function App() {
       dispatch(getApiConfiguration(url))
     });
   };
+
+
+  const generesCall = () =>{
+      let promises = []
+      let endPoint = ["tv","movie"]
+      let allGenres = {}
+  }
+
   return (
     <div> 
       <BrowserRouter>

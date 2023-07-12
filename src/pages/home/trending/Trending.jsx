@@ -3,6 +3,7 @@ import ContentWrapper from '../../../component/contentWrapper/ContentWrapper'
 import SwitchTabs from '../../../component/switchTabs/SwitchTabs'
 
 import useFetch from '../../../hooks/useFetch'
+import Carousel from '../../../component/carousel/Carousel'
 
 const Trending = () => {
 
@@ -18,15 +19,10 @@ const Trending = () => {
     <ContentWrapper>
         <span className="carouselTitle">Trending</span> 
         <SwitchTabs data={["Day", "Week"]} onTabChange={onTabChange} />
-
-        {data.map((val,key)=>{
-            <img src={val}/>
-        })
-
-        }
     </ContentWrapper> 
+      <Carousel data={data?.results} loading={loading}/>
 </div>
   )
-}
+} 
 
 export default Trending

@@ -3,7 +3,6 @@ import React,{useState} from 'react'
 import "./style.scss";
 
 const SwitchTabs = ({data,onTabChange}) => {  
-    console.log(data)
     const [selectedTab,setSelectedTab] = useState(0)  
     const [left,setLeft] = useState(0)
 
