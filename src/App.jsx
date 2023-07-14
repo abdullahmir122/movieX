@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import { fetchDataFromApi } from "./utils/api"; 
 import { useDispatch, useSelector } from "react-redux";
-import { getApiConfiguration } from "./StoreFolder/HomeSlice"; 
+import { getApiConfiguration, getGenres } from "./StoreFolder/HomeSlice"; 
 
 import Home from './pages/home/Home'
 import ErrorPage from './pages/404/ErrorPage'
@@ -20,6 +20,7 @@ function App() {
   const {url} = useSelector((state)=>state.home)
   useEffect(() => {
     fetchApiConfiguration();
+    generesCall();
   }, []); 
 
   const fetchApiConfiguration = () => {
@@ -36,10 +37,23 @@ function App() {
   };
 
 
-  const generesCall = () =>{
+  const generesCall = async () =>{
       let promises = []
-      let endPoint = ["tv","movie"]
+      let endPoints = ["tv","movie"]
       let allGenres = {}
+
+      endPoints.forEach((url)=>{
+         promises.push(fetchDataFromApi(`/genre/${url}/list`))
+      })
+
+      const data = await Promise.all(promises)
+      console.log(data)
+      data.map(({genres})=>{
+        return genres.map((items)=> (allGenres[items.id] = items))
+      })
+
+      dispatch(getGenres(allGenres))
+
   }
 
   return (
