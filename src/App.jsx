@@ -24,8 +24,7 @@ function App() {
   }, []); 
 
   const fetchApiConfiguration = () => {
-    fetchDataFromApi("/configuration").then((res) => { 
-      console.log(res)
+    fetchDataFromApi("/configuration").then((res) => {  
       const url =  {
         backdrop : res.images.secure_base_url + "original",
         poster : res.images.secure_base_url + "original",
@@ -46,8 +45,7 @@ function App() {
          promises.push(fetchDataFromApi(`/genre/${url}/list`))
       })
 
-      const data = await Promise.all(promises)
-      console.log(data)
+      const data = await Promise.all(promises)  
       data.map(({genres})=>{
         return genres.map((items)=> (allGenres[items.id] = items))
       })
